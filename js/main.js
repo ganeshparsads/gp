@@ -14,6 +14,20 @@ systems:['DISTRIBUTED SYSTEMS','Catalog pipelines, streaming snapshots, Amazon d
 robotics:['ROBOTICS','Near-real-time package state, fulfillment-center matching and perception, and the continuous-learning infrastructure connecting models to physical operations.'],
 agents:['AGENT PLATFORMS','Research, planning, human approval, coding, review, evaluation, tracing, recovery, and reusable memory coordinated as observable production loops.']
 };
+const audienceViews={
+recruiter:['THE 15-SECOND READ','Senior engineer with 11+ years across ML and distributed systems, now building production agent platforms at Amazon Games.',['Search → ML → AWS → Robotics → Agents','Open to senior AI/ML platform roles']],
+leader:['THE DELIVERY READ','A platform builder who turns ambiguous, cross-team problems into observable systems—and raises the throughput of the engineers around him.',['8-agent software engineering platform','8 → 12 story points per sprint']],
+researcher:['THE RESEARCH READ','An applied researcher studying when agents should retrieve, escalate, verify, intervene, and learn under real cost and safety constraints.',['67,200 matched verifier episodes','Causal evaluation · routing · offline RL']]
+};
+const audienceAnswer=document.querySelector('.audience-answer');
+document.querySelectorAll('.audience-switcher button').forEach(button=>button.addEventListener('click',()=>{
+  const [label,headline,proof]=audienceViews[button.dataset.audience];
+  document.querySelectorAll('.audience-switcher button').forEach(item=>item.classList.toggle('active',item===button));
+  audienceAnswer.querySelector('.answer-label').textContent=label;
+  audienceAnswer.querySelector('.answer-headline').textContent=headline;
+  audienceAnswer.querySelector('.answer-proof').innerHTML=proof.map(item=>`<span>${item}</span>`).join('');
+  audienceAnswer.classList.remove('pulse');void audienceAnswer.offsetWidth;audienceAnswer.classList.add('pulse');
+}));
 const careerStory=document.querySelector('.career-story');
 document.querySelectorAll('.map-node').forEach(node=>node.addEventListener('click',()=>{
   const key=node.dataset.path;
