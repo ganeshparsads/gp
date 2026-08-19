@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">One Bad Leaf recursive language model call tree</title>
+  <desc id="desc">A recursive model call tree showing a root, aggregators, leaves, one bad leaf, and three possible final outcomes: ignored, corrected, or propagated.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
+      .node { fill: #eef6ff; stroke: #3984d6; stroke-width: 2; }
+      .agg { fill: #f0fdf4; stroke: #2f9e44; stroke-width: 2; }
+      .leaf { fill: #fff7ed; stroke: #f08c00; stroke-width: 2; }
+      .bad { fill: #fff1f2; stroke: #e03131; stroke-width: 3; }
+      .outcome { fill: #111827; }
+      .muted { fill: #64748b; font-size: 19px; }
+      .label { fill: #0f172a; font-size: 22px; font-weight: 700; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .small { fill: #1f2937; font-size: 17px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .tiny { fill: #334155; font-size: 14px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .edge { stroke: #94a3b8; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .badEdge { stroke: #e03131; stroke-width: 4; fill: none; stroke-linecap: round; stroke-dasharray: 8 8; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="redArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#e03131"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1100" height="520" rx="24"/>
+  <rect class="panel" x="28" y="28" width="1044" height="464" rx="22"/>
+
+  <text x="62" y="75" class="label">The research question: if one sub-call is wrong, does the final answer break?</text>
+  <text x="62" y="106" class="small">RLMs decompose a task into a dynamic call tree. The bench asks which node positions deserve expensive frontier models.</text>
+
+  <path class="edge" marker-end="url(#arrow)" d="M550 155 C550 185, 370 185, 370 220"/>
+  <path class="edge" marker-end="url(#arrow)" d="M550 155 C550 185, 730 185, 730 220"/>
+  <path class="edge" marker-end="url(#arrow)" d="M370 275 C370 315, 235 315, 235 350"/>
+  <path class="edge" marker-end="url(#arrow)" d="M370 275 C370 315, 505 315, 505 350"/>
+  <path class="edge" marker-end="url(#arrow)" d="M730 275 C730 315, 640 315, 640 350"/>
+  <path class="badEdge" marker-end="url(#redArrow)" d="M730 275 C730 315, 865 315, 865 350"/>
+
+  <rect class="node" x="438" y="122" width="224" height="66" rx="16"/>
+  <text x="550" y="150" text-anchor="middle" class="label">Root</text>
+  <text x="550" y="174" text-anchor="middle" class="tiny">decomposes + final answer</text>
+
+  <rect class="agg" x="258" y="220" width="224" height="66" rx="16"/>
+  <text x="370" y="248" text-anchor="middle" class="label">Aggregator</text>
+  <text x="370" y="272" text-anchor="middle" class="tiny">combines child answers</text>
+
+  <rect class="agg" x="618" y="220" width="224" height="66" rx="16"/>
+  <text x="730" y="248" text-anchor="middle" class="label">Aggregator</text>
+  <text x="730" y="272" text-anchor="middle" class="tiny">may amplify mistakes</text>
+
+  <rect class="leaf" x="137" y="350" width="196" height="62" rx="16"/>
+  <text x="235" y="377" text-anchor="middle" class="small">Leaf answer</text>
+  <text x="235" y="399" text-anchor="middle" class="tiny">correct evidence</text>
+
+  <rect class="leaf" x="407" y="350" width="196" height="62" rx="16"/>
+  <text x="505" y="377" text-anchor="middle" class="small">Leaf answer</text>
+  <text x="505" y="399" text-anchor="middle" class="tiny">correct evidence</text>
+
+  <rect class="leaf" x="542" y="350" width="196" height="62" rx="16"/>
+  <text x="640" y="377" text-anchor="middle" class="small">Leaf answer</text>
+  <text x="640" y="399" text-anchor="middle" class="tiny">correct evidence</text>
+
+  <rect class="bad" x="767" y="350" width="196" height="62" rx="16"/>
+  <text x="865" y="377" text-anchor="middle" class="small">Bad leaf</text>
+  <text x="865" y="399" text-anchor="middle" class="tiny">hallucinated / wrong</text>
+
+  <rect x="122" y="440" width="256" height="34" rx="17" fill="#e7f5ff" stroke="#74c0fc"/>
+  <text x="250" y="463" text-anchor="middle" class="tiny">Ignored: answer survives</text>
+  <rect x="422" y="440" width="256" height="34" rx="17" fill="#ebfbee" stroke="#69db7c"/>
+  <text x="550" y="463" text-anchor="middle" class="tiny">Corrected: parent fixes it</text>
+  <rect x="722" y="440" width="256" height="34" rx="17" fill="#fff5f5" stroke="#ff8787"/>
+  <text x="850" y="463" text-anchor="middle" class="tiny">Propagated: final answer breaks</text>
+</svg>

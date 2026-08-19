@@ -1,50 +1,7 @@
-$(document).ready( function() {
-
-	// Logo
-	var $logo 	= $('#logo');
-    var $hellologo = $('#helloworld');
-	 if (location.href.indexOf("#") != -1) {
-        if(location.href.substr(location.href.indexOf("#"))!='#about'){
-        	$logo.show();
-        }
-        else{
-            $hellologo.show();
-        }
-    }
-    
-	// Show logo 
-	$('#tab-container .tab a').click(function() {
-	  
-      $logo.slideDown('slow');
-      $hellologo.slideUp('slow');
-
-	});
-	// Hide logo
-	$('#tab-about').click(function() {
-	  $logo.slideUp('slow');
-      $hellologo.slideDown('slow');
-	});	
-function animMeter(){
-    $(".meter > span").each(function() {
-                $(this)
-                    .data("origWidth", $(this).width())
-                    .width(0)
-                    .animate({
-                        width: $(this).data("origWidth")
-                    }, 1200);
-            });
-}
-animMeter();
-
-      $('#tab-container').easytabs({
-        animate			: true,
-        updateHash		: true,
-        transitionIn	: 'slideDown',
-        transitionOut	: 'slideUp',
-        animationSpeed	: 800,
-        tabActiveClass	: 'active'}).bind('easytabs:midTransition', function(event, $clicked, $targetPanel){
-            if($targetPanel.selector=='#resume'){
-                    animMeter();
-            }
-        });
-    });
+document.documentElement.classList.add('js');
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -40px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('details').forEach(detail=>detail.addEventListener('toggle',()=>{const marker=detail.querySelector('summary span');if(marker)marker.textContent=detail.open?'−':'+'}));
+const orbit=document.querySelector('.hero-orbit');
+if(orbit&&matchMedia('(pointer: fine)').matches){addEventListener('pointermove',event=>{orbit.style.setProperty('--mx',((event.clientX/innerWidth-.5)*10)+'px');orbit.style.setProperty('--my',((event.clientY/innerHeight-.5)*10)+'px')},{passive:true})}
